@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe(API::V1::GamesController, type: :routing) do
   describe 'Routing' do
-    let(:uuid) { 1 }
+    let(:id) { 1 }
 
     # Delete
-    it "routes DELETE /api/v1/games/:uuid" do
+    it "routes DELETE /api/v1/games/:id" do
       expect(
-          delete: "/api/v1/games/#{uuid}"
+          delete: "/api/v1/games/#{id}"
       ).to route_to action:     "destroy",
                     controller: "api/v1/games",
                     format:     :json,
-                    id:         uuid.to_s
+                    id:         id.to_s
     end
 
     # Get
@@ -21,13 +21,13 @@ RSpec.describe(API::V1::GamesController, type: :routing) do
       ).not_to be_routable
     end
 
-    it "routes GET /api/v1/games/:uuid" do
+    it "routes GET /api/v1/games/:id" do
       expect(
-          get: "/api/v1/games/#{uuid}"
+          get: "/api/v1/games/#{id}"
       ).to route_to action:     'show',
                     controller: 'api/v1/games',
                     format:     :json,
-                    id:         uuid.to_s
+                    id:         id.to_s
     end
 
     # Post
@@ -40,13 +40,13 @@ RSpec.describe(API::V1::GamesController, type: :routing) do
     end
 
     # Put
-    it "does not route PUT /api/v1/games/:uuid" do
+    it "does not route PUT /api/v1/games/:id" do
       expect(
-          put: "/api/v1/games/#{uuid}"
+          put: "/api/v1/games/#{id}"
       ).to route_to action:     'update',
                     controller: 'api/v1/games',
                     format:     :json,
-                    id:         uuid.to_s
+                    id:         id.to_s
 
     end
   end
