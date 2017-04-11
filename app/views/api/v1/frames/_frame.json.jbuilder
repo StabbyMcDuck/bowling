@@ -5,6 +5,9 @@ json.frame do
   json.number frame.number
   json.first_ball frame.first_ball
   json.second_ball frame.second_ball
+  if frame.third_ball
+    json.third_ball frame.third_ball
+  end
   json.created_at frame.created_at
   json.updated_at frame.updated_at
   bonus = bonus(frame)

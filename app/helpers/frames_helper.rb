@@ -15,14 +15,19 @@ module FramesHelper
   def strike_bonus(frame)
     # strike bonus = 10 + next two rolls
     bonus = 0
-    frames = Frame.where(player_id: frame.player_id, number: [frame.number + 1, frame.number + 2]).order(number: :asc)
 
-    bonus += frames.first.first_ball
+    if frame.number < 10
+      frames = Frame.where(player_id: frame.player_id, number: [frame.number + 1, frame.number + 2]).order(number: :asc)
 
-    if frames.first.first_ball == 10
-      bonus += frames.second.first_ball
+      bonus += frames.first&.first_ball||0
+
+      if frames.first&.first_ball == 10
+        bonus += frames.second&.first_ball||0
+      else
+        bonus += frames.first&.second_ball||0
+      end
     else
-      bonus += frames.first.second_ball
+      bonus = (frame.second_ball || 0) + (frame.third_ball || 0)
     end
 
     bonus
@@ -33,7 +38,7 @@ module FramesHelper
     bonus = 0
     frames = Frame.where(player_id: frame.player_id, number: [frame.number + 1])
 
-    bonus += frames.first.first_ball
+    bonus += frames.first&.first_ball||0
 
     bonus
   end
@@ -42,6 +47,10 @@ module FramesHelper
     first_ball = frame.first_ball || 0
     second_ball = frame.second_ball || 0
 
-    first_ball + second_ball
+    if first_ball == 10
+      first_ball
+    else
+      first_ball + second_ball
+    end
   end
 end

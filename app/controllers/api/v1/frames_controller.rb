@@ -1,10 +1,11 @@
 class API::V1::FramesController < API::V1::APIController
   before_action :set_frame, only: [:show, :edit, :update, :destroy]
+  before_action :set_player, only: [:index]
 
   # GET /frames
   # GET /frames.json
   def index
-    @frames = Frame.all
+    @frames = @player.frames.order(number: :asc)
   end
 
   # GET /frames/1
@@ -75,5 +76,7 @@ class API::V1::FramesController < API::V1::APIController
       params.require(:frame).permit(:player_id, :first_ball, :second_ball, :third_ball)
     end
 
-
+    def set_player
+      @player = Player.find(params[:player_id])
+    end
 end
