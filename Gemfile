@@ -60,6 +60,9 @@ end
 
 group :test do
   # Rspec matchers for ActiveRecord
-  gem 'shoulda-matchers', '~> 3.1'end
+  gem 'shoulda-matchers', '~> 3.1'
+  # Faker for making fake names
+  gem 'faker', '~> 1.6', '>= 1.6.2'
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

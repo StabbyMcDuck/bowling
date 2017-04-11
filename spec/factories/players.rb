@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :player do
-    name { Faker::RickAndMorty.character }
+    name { Faker::Name.name }
     game
   end
 end
