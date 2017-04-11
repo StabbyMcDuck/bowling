@@ -63,6 +63,6 @@ RSpec.resource 'Frame', type: :acceptance do
   end
 
   def frame_json(frame)
-    {frame:{id: frame.id, number: frame.number, first_ball: frame.first_ball, second_ball: frame.second_ball, bonus: ( be >= 0), score: (frame.first_ball + frame.second_ball), total_score: ( be >= 0) }}
+    {frame:{id: frame.id, number: frame.number, first_ball: frame.first_ball, second_ball: frame.second_ball, bonus: ( be >= 0), score: ((frame.first_ball || 0) + (frame.second_ball || 0)), total_score: ( be >= 0) }}
   end
 end

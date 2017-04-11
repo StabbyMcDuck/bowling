@@ -28,6 +28,11 @@ class API::V1::FramesController < API::V1::APIController
   # POST /frames.json
   def create
     @frame = Frame.new(frame_params)
+    player = @frame.player
+
+    unless player.nil?
+      @frame.number = (player.frames.maximum(:number) || 0) + 1
+    end
 
     respond_to do |format|
       if @frame.save
@@ -67,7 +72,7 @@ class API::V1::FramesController < API::V1::APIController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def frame_params
-      params.require(:frame).permit(:player_id, :number, :first_ball, :second_ball)
+      params.require(:frame).permit(:player_id, :first_ball, :second_ball, :third_ball)
     end
 
 

@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20170406202808) do
   create_table "frames", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "player_id",               null: false
     t.integer  "number",      default: 1, null: false
-    t.integer  "first_ball",  default: 0, null: false
-    t.integer  "second_ball", default: 0
+    t.integer  "first_ball"
+    t.integer  "second_ball"
+    t.integer  "third_ball"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["player_id"], name: "index_frames_on_player_id", using: :btree

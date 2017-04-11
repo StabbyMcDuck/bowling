@@ -1,8 +1,11 @@
 module FramesHelper
   def bonus(frame)
-    if frame.first_ball == 10
+    first_ball = frame.first_ball || 0
+    second_ball = frame.second_ball || 0
+
+    if first_ball == 10
       strike_bonus(frame)
-    elsif frame.first_ball + frame.second_ball == 10
+    elsif first_ball + second_ball == 10
       spare_bonus(frame)
     else
       0
@@ -36,6 +39,9 @@ module FramesHelper
   end
 
   def score(frame)
-    frame.first_ball + frame.second_ball
+    first_ball = frame.first_ball || 0
+    second_ball = frame.second_ball || 0
+
+    first_ball + second_ball
   end
 end
